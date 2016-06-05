@@ -1,0 +1,34 @@
+apply plugin: "java"
+
+sourceSets {
+    main.java.srcDir "src"
+}
+
+jar {
+    manifest.attributes "Main-Class": "rocks.cow.Main"
+}
+
+
+task fatJar(type: Jar) {
+    manifest.attributes "Main-Class": "rocks.cow.Main"
+
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+repositories {
+    mavenCentral()
+
+//    maven {
+//        url "http://mvnrepository.com/artifact/net.sourceforge.htmlunit/"
+//    }
+}
+
+dependencies {
+    compile 'net.sourceforge.htmlunit:htmlunit:2.21'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'org.jsoup:jsoup:1.9.2'
+    // will want to add: https://github.com/vdmeer/asciitable
+    // for table creation
+}
