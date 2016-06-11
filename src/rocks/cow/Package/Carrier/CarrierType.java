@@ -2,41 +2,43 @@ package rocks.cow.Package.Carrier;
 
 import rocks.cow.Tracker.Tracker;
 import rocks.cow.Tracker.Trackers.UpsTracker;
+import rocks.cow.Tracker.Trackers.UspsTracker;
 
 import java.util.Optional;
 
 public enum CarrierType {
     UPS(
             "UPS",
-            "https://wwwapps.ups.com/WebTracking/processInputRequest?&sort_by=status&tracknums_displayed=1&TypeOfInquiryNumber=T&loc=en_US&InquiryNumber1=",
+            "https://wwwapps.ups.com/WebTracking/track?loc=en_US&track.x=Track&trackNums=",
             UpsTracker.class
     ),
 
     USPS(
             "USPS",
-            "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1="
+            "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=",
+            UspsTracker.class
     ),
 
     FEDEX(
             "FEDEX",
-            "Fillter"
+            "https://www.fedex.com/apps/fedextrack/?action=track&action=track&tracknumber_list="
     );
 
     private String id;
     private String url;
-    private Class<? extends Tracker> aClass;
+    private Class<? extends Tracker> trackingClass;
 
     @Deprecated  // will be removed soon
     CarrierType(String id, String url) {
         this.id = id;
         this.url = url;
-        this.aClass = null;
+        this.trackingClass = null;
     }
 
-    CarrierType(String id, String url, Class<? extends Tracker> aClass) {
+    CarrierType(String id, String url, Class<? extends Tracker> trackingClass) {
         this.id = id;
         this.url = url;
-        this.aClass = aClass;
+        this.trackingClass = trackingClass;
     }
 
     public String getID() {
@@ -45,6 +47,10 @@ public enum CarrierType {
 
     public String getUrl() {
         return this.url;
+    }
+
+    public Class<? extends Tracker> getTrackingClass() {
+        return this.trackingClass;
     }
 
     public static Optional<CarrierType> getType(String id) {
