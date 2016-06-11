@@ -21,9 +21,16 @@ public interface Tracker {
         return null;
     }
 
+    default WebDriver loadpageSource(WebDriver webDriver) {
+        return webDriver;
+    }
+
     default String getPageSource(String url) {
         WebDriver webDriver = new HtmlUnitDriver();
         webDriver.get(url);
+
+        webDriver = this.loadpageSource(webDriver);
+
         String src = webDriver.getPageSource();
         webDriver.close();
 
