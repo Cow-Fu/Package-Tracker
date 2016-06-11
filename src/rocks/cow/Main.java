@@ -17,8 +17,6 @@ public class Main {
 
         Package p = new Package("Fluffy", "1Z7R0E530201047672", CarrierType.UPS);
 
-
-
         HashMap<String, ArrayList<? extends String>> packageInfo = TrackingManager.track(p);
 
         System.out.println(packageInfo.get("dateTime"));

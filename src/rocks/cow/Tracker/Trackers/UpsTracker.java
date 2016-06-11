@@ -58,8 +58,6 @@ public class UpsTracker implements Tracker {
     }
 
     public HashMap<String, ArrayList<? extends String>> track(Package p) {
-        ArrayList<Element> elementList = new ArrayList<>();
-        Elements element;
 
         Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
 
@@ -68,9 +66,8 @@ public class UpsTracker implements Tracker {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        element = doc.body().select("table.dataTable").select("tbody");
-        // System.out.println(element.html());
-        element = element.first().children();
+
+        Elements element = doc.body().select("table.dataTable").select("tbody").first().children();
         element.remove(0);
 
         for (Element element1: element) {

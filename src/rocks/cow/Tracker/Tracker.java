@@ -2,7 +2,6 @@ package rocks.cow.Tracker;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import rocks.cow.Package.Package;
 
 import java.util.ArrayList;
