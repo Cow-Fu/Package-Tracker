@@ -1,39 +1,46 @@
 package rocks.cow.Tracker;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import rocks.cow.Package.Package;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 
 public interface Tracker {
-    ArrayList<String> dateTime = new ArrayList<String>();
+    ArrayList<String> dateTime = new ArrayList<>();
     ArrayList<String> status = new ArrayList<>();
     ArrayList<String> location = new ArrayList<>();
 
     HashMap<String, ArrayList<? extends String>> track(Package p);
 
-    default ArrayList<String> cleanUpDateTime(ArrayList<String> dateTime) {
-        return null;
-    }
-
-    default ArrayList<String> cleanUpStatus(ArrayList<String> status) {
-        return null;
-    }
-
-    default ArrayList<String> cleanUpLoc(ArrayList<String> loc) {
+    default ArrayList<String> cleanUp(ArrayList<String> list) {
         return null;
     }
 
     default String getPageSource(String url) {
-        HtmlUnitDriver webDriver = new HtmlUnitDriver();
-        webDriver.setJavascriptEnabled(true);
-
+        WebDriver webDriver = new HtmlUnitDriver();
         webDriver.get(url);
         String src = webDriver.getPageSource();
         webDriver.close();
 
         return src;
+    }
+
+    static ArrayList<String> fillBlanks(ArrayList<String> list) {
+        ArrayList<String> temp = new ArrayList<>();
+        Pattern emptyStr = Pattern.compile("^([ ]*)$");
+
+        for (int i = 0; i < list.size() - 1; ++i) {
+            if (emptyStr.matcher(list.get(i)).find()) {
+                temp.add(temp.get(i - 1));
+                continue;
+            }
+            temp.add(list.get(i));
+        }
+        return temp;
     }
 }
