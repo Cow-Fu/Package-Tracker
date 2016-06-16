@@ -1,6 +1,7 @@
 package rocks.cow.Package.Carrier;
 
 import rocks.cow.Tracker.Tracker;
+import rocks.cow.Tracker.Trackers.FedexTracker;
 import rocks.cow.Tracker.Trackers.UpsTracker;
 import rocks.cow.Tracker.Trackers.UspsTracker;
 
@@ -21,19 +22,14 @@ public enum CarrierType {
 
     FEDEX(
             "FEDEX",
-            "https://www.fedex.com/apps/fedextrack/?action=track&action=track&tracknumber_list="
+            "https://www.fedex.com/apps/fedextrack/?action=track&action=track&tracknumber_list=",
+            FedexTracker.class
     );
 
     private String id;
     private String url;
     private Class<? extends Tracker> trackingClass;
 
-    @Deprecated  // will be removed soon
-    CarrierType(String id, String url) {
-        this.id = id;
-        this.url = url;
-        this.trackingClass = null;
-    }
 
     CarrierType(String id, String url, Class<? extends Tracker> trackingClass) {
         this.id = id;
