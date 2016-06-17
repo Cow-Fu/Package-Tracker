@@ -12,8 +12,8 @@ import java.util.logging.Level;
 
 public class Main {
     public static void main(String[] args) throws IOException, NoSuchMethodException {
-       java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
-       System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
         Package p = new Package("Fluffy", "1Z7R0E530201047672", CarrierType.UPS);
 

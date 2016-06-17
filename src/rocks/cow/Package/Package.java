@@ -22,15 +22,30 @@ public class Package {
         return this.trackingNum;
     }
 
-    public String getId(){
+    public Package setTrackingNum(String trackingNum) {
+        this.trackingNum = trackingNum;
+        return this;
+    }
+
+    public String getId() {
         return this.id;
+    }
+
+    //setters
+
+    public Package setId(String id) {
+        this.id = id;
+        return this;
     }
 
     public CarrierType getCarrier() {
         return carrier;
     }
 
-    //setters
+    public Package setCarrier(CarrierType carrier) {
+        this.carrier = carrier;
+        return this;
+    }
 
     public Package setAll(String id, String trackingNum, String carrier) {
         return this.setId(id).setTrackingNum(trackingNum).setCarrier(carrier);
@@ -40,17 +55,6 @@ public class Package {
         return this.setId(id).setTrackingNum(trackingNum).setCarrier(carrier);
     }
 
-
-    public Package setId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public Package setTrackingNum(String trackingNum) {
-        this.trackingNum = trackingNum;
-        return this;
-    }
-
     public Package setCarrier(String carrier) {
         Optional<CarrierType> carrierType = CarrierType.getType(carrier);
         if (!carrierType.isPresent()) {
@@ -58,10 +62,5 @@ public class Package {
         }
 
         return this.setCarrier(carrierType.get());
-    }
-
-    public Package setCarrier(CarrierType carrier) {
-        this.carrier = carrier;
-        return this;
     }
 }

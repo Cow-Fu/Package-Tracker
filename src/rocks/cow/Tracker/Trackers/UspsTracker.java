@@ -2,7 +2,6 @@ package rocks.cow.Tracker.Trackers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import org.jsoup.select.Elements;
 import rocks.cow.Package.Package;
 import rocks.cow.Tracker.Tracker;

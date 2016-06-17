@@ -6,13 +6,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rocks.cow.Package.Package;
 import rocks.cow.Tracker.Tracker;
-import rocks.cow.Util.FileMethods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,7 @@ public class FedexTracker implements Tracker {
 
     @Override
     public String getPageSource(String url) {
-        HtmlUnitDriver webDriver = new HtmlUnitDriver(){
+        HtmlUnitDriver webDriver = new HtmlUnitDriver() {
             @Override
             protected WebClient newWebClient(BrowserVersion version) {
                 WebClient webClient = super.newWebClient(version);

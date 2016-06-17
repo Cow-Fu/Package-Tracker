@@ -37,6 +37,15 @@ public enum CarrierType {
         this.trackingClass = trackingClass;
     }
 
+    public static Optional<CarrierType> getType(String id) {
+        for (CarrierType carrierType : CarrierType.values()) {
+            if (carrierType.getID().equals(id.toUpperCase())) {
+                return Optional.of(carrierType);
+            }
+        }
+        return Optional.empty();
+    }
+
     public String getID() {
         return this.id;
     }
@@ -47,15 +56,6 @@ public enum CarrierType {
 
     public Class<? extends Tracker> getTrackingClass() {
         return this.trackingClass;
-    }
-
-    public static Optional<CarrierType> getType(String id) {
-        for (CarrierType carrierType: CarrierType.values()) {
-            if (carrierType.getID().equals(id.toUpperCase())) {
-                return Optional.of(carrierType);
-            }
-        }
-        return Optional.empty();
     }
 }
 
