@@ -19,15 +19,10 @@ task fatJar(type: Jar) {
 
 repositories {
     mavenCentral()
-
-//    maven {
-//        url "http://mvnrepository.com/artifact/net.sourceforge.htmlunit/"
-//    }
 }
 
 dependencies {
-//    compile 'net.sourceforge.htmlunit:htmlunit:2.21'
-//    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.google.code.gson:gson:2.6.2'
     compile 'org.jsoup:jsoup:1.9.2'
 
     compile 'org.seleniumhq.selenium:selenium-java:2.53.0'

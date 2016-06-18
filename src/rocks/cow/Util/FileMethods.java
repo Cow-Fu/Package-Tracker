@@ -1,12 +1,19 @@
 package rocks.cow.Util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 public class FileMethods {
-    public static String readFullFile(File file) {
+    private File file;
+
+    public FileMethods(String file) {
+        this(new File(file));
+    }
+
+    public FileMethods(File file) {
+        this.file = file;
+    }
+
+    public String readFullFile() {
         byte[] data = null;
 
         FileInputStream fis = null;
@@ -30,7 +37,15 @@ public class FileMethods {
         }
     }
 
-    public static String readFullFile(String file) {
-        return readFullFile(new File(file));
+
+    public void write(String text) {
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(this.file);
+            fileWriter.write(text);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
