@@ -6,12 +6,12 @@ import rocks.cow.Package.Carrier.CarrierType;
 import java.util.Optional;
 
 public class Package {
-    private String id;
+    private String description;
     private String trackingNum;
     private CarrierType carrier;
 
-    public Package(String id, String trackingNum, CarrierType carrier) {
-        this.id = id;
+    public Package(String description, String trackingNum, CarrierType carrier) {
+        this.description = description;
         this.trackingNum = trackingNum;
         this.carrier = carrier;
     }
@@ -27,14 +27,14 @@ public class Package {
         return this;
     }
 
-    public String getId() {
-        return this.id;
+    public String getDescription() {
+        return this.description;
     }
 
     //setters
 
-    public Package setId(String id) {
-        this.id = id;
+    public Package setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -48,11 +48,11 @@ public class Package {
     }
 
     public Package setAll(String id, String trackingNum, String carrier) {
-        return this.setId(id).setTrackingNum(trackingNum).setCarrier(carrier);
+        return this.setDescription(id).setTrackingNum(trackingNum).setCarrier(carrier);
     }
 
     public Package setAll(String id, String trackingNum, CarrierType carrier) {
-        return this.setId(id).setTrackingNum(trackingNum).setCarrier(carrier);
+        return this.setDescription(id).setTrackingNum(trackingNum).setCarrier(carrier);
     }
 
     public Package setCarrier(String carrier) {
