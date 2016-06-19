@@ -5,25 +5,25 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
-    private ArrayList<Package> packages = new ArrayList<>();
 
-    public Optional<ArrayList<Package>> getPackage(String id) {
+    public ArrayList<Package> getPackage(String id) {
         ArrayList<Package> packageList = this.filterPackage(id);
 
         if (packageList.size() == 0) {
-            return Optional.empty();
+            return null;
         }
-        return Optional.of(packageList);
+        return packageList;
     }
 
     private ArrayList<Package> filterPackage(String id) {
         ArrayList<Package> matchingPacakges = new ArrayList<>();
         id = id.toLowerCase();
 
-        final Pattern descPattern = Pattern.compile(String.format(".*%s.*", id));
-        final Pattern trackPattern = Pattern.compile(String.format("(^%s|%s$)", id, id));
+        final Pattern descPattern = Pattern.compile(String.format("(.*%s.*)", id), Pattern.CASE_INSENSITIVE);
+        final Pattern trackPattern = Pattern.compile(String.format("(?i)(^%s|%s$)", id, id), Pattern.CASE_INSENSITIVE);
 
-        for (Package pack: packages) {
+        for (Package pack: this) {
+            System.out.println(pack.getDescription());
             if (descPattern.matcher(pack.getDescription()).find()) {
                 matchingPacakges.add(pack);
                 continue;
