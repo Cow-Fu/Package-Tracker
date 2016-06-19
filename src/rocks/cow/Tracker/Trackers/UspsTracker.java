@@ -5,11 +5,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import rocks.cow.Package.Package;
 import rocks.cow.Tracker.Tracker;
+import rocks.cow.Util.TrackerUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UspsTracker implements Tracker {
+public final class UspsTracker extends TrackerUtils implements Tracker {
 
     @Override
     public HashMap<String, ArrayList<? extends String>> track(Package p) {
@@ -24,7 +25,7 @@ public class UspsTracker implements Tracker {
         HashMap<String, ArrayList<? extends String>> dataMap = new HashMap<>();
 
         dataMap.put("dateTime", dateTime);
-        dataMap.put("location", Tracker.fillBlanks(location));
+        dataMap.put("location", fillBlanks(location));
         dataMap.put("status", status);
 
         return dataMap;

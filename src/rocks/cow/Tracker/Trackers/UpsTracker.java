@@ -12,13 +12,14 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rocks.cow.Package.Package;
 import rocks.cow.Tracker.Tracker;
+import rocks.cow.Util.TrackerUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UpsTracker implements Tracker {
+public final class UpsTracker extends TrackerUtils implements Tracker {
 
     // TODO: 6/8/16 ask dark why this causes an out of mem error
     // @Override
@@ -35,8 +36,7 @@ public class UpsTracker implements Tracker {
 
 
     @Override
-    public String getPageSource(String url) {
-
+    protected String getPageSource(String url) {
         HtmlUnitDriver webDriver = new HtmlUnitDriver();
         webDriver.setJavascriptEnabled(true);
         webDriver.get(url);
@@ -76,7 +76,7 @@ public class UpsTracker implements Tracker {
         HashMap<String, ArrayList<? extends String>> dataMap = new HashMap<>();
 
         dataMap.put("dateTime", dateTime);
-        dataMap.put("location", Tracker.fillBlanks(location));
+        dataMap.put("location", fillBlanks(location));
         dataMap.put("status", status);
 
         return dataMap;
