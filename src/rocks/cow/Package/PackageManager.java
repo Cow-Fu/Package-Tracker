@@ -1,12 +1,32 @@
 package rocks.cow.Package;
 
+import rocks.cow.Package.Carrier.CarrierType;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
 
-    public Optional<ArrayList<Package>> getPackage(String id) {
+    public void addNew (String description, String trackingNum, CarrierType carrierType) {
+        this.add(new Package(description, trackingNum, carrierType));
+    }
+
+    public boolean remove (String id) {
+        ArrayList<Package> packageList = this.filterPackage(id);
+        int listSize = packageList.size();
+
+        if (listSize >= 2 || listSize == 0) {
+            return false;
+        }
+        this.remove(packageList.get(0));
+
+        return true;
+    }
+
+    public Optional<ArrayList<Package>> get(String id) {
         ArrayList<Package> packageList = this.filterPackage(id);
 
         if (packageList.size() == 0) {

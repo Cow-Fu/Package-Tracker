@@ -8,4 +8,5 @@ page.txt
 page.xml
 run.sh
 test*
+.gitignore
 
