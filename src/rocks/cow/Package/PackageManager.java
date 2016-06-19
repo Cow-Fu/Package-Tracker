@@ -6,13 +6,13 @@ import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
 
-    public ArrayList<Package> getPackage(String id) {
+    public Optional<ArrayList<Package>> getPackage(String id) {
         ArrayList<Package> packageList = this.filterPackage(id);
 
         if (packageList.size() == 0) {
-            return null;
+            return Optional.empty();
         }
-        return packageList;
+        return Optional.of(packageList);
     }
 
     private ArrayList<Package> filterPackage(String id) {
@@ -20,10 +20,9 @@ public class PackageManager extends ArrayList<Package> {
         id = id.toLowerCase();
 
         final Pattern descPattern = Pattern.compile(String.format("(.*%s.*)", id), Pattern.CASE_INSENSITIVE);
-        final Pattern trackPattern = Pattern.compile(String.format("(?i)(^%s|%s$)", id, id), Pattern.CASE_INSENSITIVE);
+        final Pattern trackPattern = Pattern.compile(String.format("(^%s|%s$)", id, id), Pattern.CASE_INSENSITIVE);
 
         for (Package pack: this) {
-            System.out.println(pack.getDescription());
             if (descPattern.matcher(pack.getDescription()).find()) {
                 matchingPacakges.add(pack);
                 continue;
