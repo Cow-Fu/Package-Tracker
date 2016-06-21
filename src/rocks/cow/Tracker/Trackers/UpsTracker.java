@@ -12,13 +12,16 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rocks.cow.Package.Package;
 import rocks.cow.Tracker.Tracker;
+import rocks.cow.Util.Tracking.TrackerUtils;
+import rocks.cow.Util.Tracking.WebPageHandler;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UpsTracker implements Tracker {
+public final class UpsTracker implements Tracker {
+    private WebPageHandler webHandler;
 
     // TODO: 6/8/16 ask dark why this causes an out of mem error
     // @Override
@@ -34,33 +37,30 @@ public class UpsTracker implements Tracker {
     // }
 
 
-    @Override
-    public String getPageSource(String url) {
-
-        HtmlUnitDriver webDriver = new HtmlUnitDriver();
-        webDriver.setJavascriptEnabled(true);
-        webDriver.get(url);
-
-        webDriver.findElement(By.cssSelector("h4.btnlnkL")).click();
-
-        Wait<WebDriver> wait = new WebDriverWait(webDriver, 10);
-        wait.until(webDriver1 -> webDriver.executeScript("return document.readyState").equals("complete"));
-
-        String src = webDriver.getPageSource();
-        webDriver.close();
-
-        return src;
-    }
-
     public HashMap<String, ArrayList<? extends String>> track(Package p) {
 
-        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
+        WebPageHandler webHandler = new WebPageHandler() {
+            @Override
+            public WebDriver loadPageSource(WebDriver webDriver) {
+                webDriver.findElement(By.cssSelector("h4.btnlnkL")).click();
 
-        try {
-            new FileWriter("ups.html").write(doc.html());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                Wait<WebDriver> wait = new WebDriverWait(webDriver, 10);
+                wait.until(webDriver1 -> ((HtmlUnitDriver) webDriver).executeScript("return document.readyState").equals("complete"));
+
+                return webDriver;
+            }
+        };
+
+        ((HtmlUnitDriver) webHandler.getDriver()).setJavascriptEnabled(true);
+
+        Document doc = Jsoup.parse(webHandler.getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
+
+
+        // try {
+        //     new FileWriter("ups.html").write(doc.html());
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
 
         Elements element = doc.body().select("table.dataTable").select("tbody").first().children();
         element.remove(0);
@@ -76,11 +76,9 @@ public class UpsTracker implements Tracker {
         HashMap<String, ArrayList<? extends String>> dataMap = new HashMap<>();
 
         dataMap.put("dateTime", dateTime);
-        dataMap.put("location", Tracker.fillBlanks(location));
+        dataMap.put("location", TrackerUtils.fillBlanks(location));
         dataMap.put("status", status);
 
         return dataMap;
     }
 }
-
-
