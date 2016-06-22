@@ -1,6 +1,6 @@
 package rocks.cow.Package.Carrier;
 
-import rocks.cow.Tracker.Tracker;
+import rocks.cow.Tracker.Track;
 import rocks.cow.Tracker.Trackers.FedexTracker;
 import rocks.cow.Tracker.Trackers.UpsTracker;
 import rocks.cow.Tracker.Trackers.UspsTracker;
@@ -28,10 +28,10 @@ public enum CarrierType {
 
     private String id;
     private String url;
-    private Class<? extends Tracker> trackingClass;
+    private Class<? extends Track> trackingClass;
 
 
-    CarrierType(String id, String url, Class<? extends Tracker> trackingClass) {
+    CarrierType(String id, String url, Class<? extends Track> trackingClass) {
         this.id = id;
         this.url = url;
         this.trackingClass = trackingClass;
@@ -54,7 +54,7 @@ public enum CarrierType {
         return this.url;
     }
 
-    public Class<? extends Tracker> getTrackingClass() {
+    public Class<? extends Track> getTrackingClass() {
         return this.trackingClass;
     }
 }

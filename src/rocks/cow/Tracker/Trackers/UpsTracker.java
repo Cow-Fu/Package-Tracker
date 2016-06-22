@@ -17,7 +17,7 @@ import rocks.cow.Util.Tracking.TrackerUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public final class UpsTracker implements Tracker {
+public final class UpsTracker extends Tracker {
 
     @Override
     public String getPageSource(String url) {

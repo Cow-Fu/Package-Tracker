@@ -10,7 +10,7 @@ import rocks.cow.Util.Tracking.TrackerUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public final class UspsTracker implements Tracker {
+public final class UspsTracker extends Tracker {
     @Override
     public HashMap<String, ArrayList<? extends String>> track(Package p) {
 

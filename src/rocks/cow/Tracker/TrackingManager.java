@@ -10,7 +10,7 @@ import java.util.Optional;
 public class TrackingManager {
 
     public static HashMap<String, ArrayList<? extends String>> track(Package p) {
-        Optional<Tracker> tracker = Optional.empty();
+        Optional<Track> tracker = Optional.empty();
 
         for (CarrierType type : CarrierType.values()) {
             if (p.getCarrier().equals(type)) {
