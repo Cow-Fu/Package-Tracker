@@ -3,27 +3,19 @@ package rocks.cow.Tracker.Trackers;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import rocks.cow.Package.Package;
 import rocks.cow.Tracker.Tracker;
 import rocks.cow.Util.Tracking.TrackerUtils;
-import rocks.cow.Util.Tracking.WebPageHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class UspsTracker implements Tracker {
-
     @Override
     public HashMap<String, ArrayList<? extends String>> track(Package p) {
 
-        Document doc;
-        WebPageHandler webDriver = new WebPageHandler();
+        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
 
-        // try (WebPageHandler webDriver = new WebPageHandler()) {
-           doc = Jsoup.parse(webDriver.getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
-        // }
         Elements e = doc.body().select("tbody.details");
 
         e.select("td.date-time").forEach(date -> dateTime.add(date.text()));
