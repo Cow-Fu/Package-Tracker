@@ -6,7 +6,6 @@ import rocks.cow.Package.Package;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 
 public interface Tracker {
@@ -15,4 +14,14 @@ public interface Tracker {
     ArrayList<String> location = new ArrayList<>();
 
     HashMap<String, ArrayList<? extends String>> track(Package p);
+
+    default String getPageSource(String url) {
+        WebDriver webDriver = new HtmlUnitDriver();
+        webDriver.get(url);
+
+        String src = webDriver.getPageSource();
+        webDriver.quit();
+
+        return src;
+    }
 }
