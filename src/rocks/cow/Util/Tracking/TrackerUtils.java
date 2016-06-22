@@ -21,14 +21,11 @@ public class TrackerUtils {
 
     public static ArrayList<String> formatText(ArrayList<String> list) {
         ArrayList<String> newList = new ArrayList<>();
-        String s;
-
         for (String text: list) {
             text = text.trim();
 
             newList.add(text);
         }
-
         return newList;
     }
 
