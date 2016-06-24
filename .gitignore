@@ -1,0 +1,12 @@
+.idea
+.gradle
+gradle
+build
+out
+
+page.txt
+page.xml
+run.sh
+test*
+.gitignore
+
