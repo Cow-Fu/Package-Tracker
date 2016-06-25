@@ -1,4 +1,4 @@
-package rocks.cow.Tracker;
+package rocks.cow.Tracker.TrackerBase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
