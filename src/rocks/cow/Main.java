@@ -25,9 +25,9 @@ public class Main {
 
 
         if (optPackageList.isPresent()) {
-            ArrayList<Package> packageList =  optPackageList.get();
+            ArrayList<Package> packageList = optPackageList.get();
 
-            for (Package pack: packageList) {
+            for (Package pack : packageList) {
                 System.out.println(pack.getDescription() + ":");
 
                 TrackingInfo packageInfo = TrackingManager.track(pack);

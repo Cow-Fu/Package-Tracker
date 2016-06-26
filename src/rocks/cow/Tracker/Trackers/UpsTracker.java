@@ -15,9 +15,6 @@ import rocks.cow.Tracker.TrackerBase.Tracker;
 import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.Util.Tracking.TrackerUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public final class UpsTracker extends Tracker {
 
     @Override
@@ -29,7 +26,7 @@ public final class UpsTracker extends Tracker {
         webDriver.findElement(By.cssSelector("h4.btnlnkL")).click();
 
         Wait<WebDriver> wait = new WebDriverWait(webDriver, 10);
-        wait.until(webDriver1 ->  webDriver.executeScript("return document.readyState").equals("complete"));
+        wait.until(webDriver1 -> webDriver.executeScript("return document.readyState").equals("complete"));
 
         String src = webDriver.getPageSource();
         webDriver.quit();

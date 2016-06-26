@@ -8,11 +8,11 @@ import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
 
-    public void addNew (String description, String trackingNum, CarrierType carrierType) {
+    public void addNew(String description, String trackingNum, CarrierType carrierType) {
         this.add(new Package(description, trackingNum, carrierType));
     }
 
-    public boolean remove (String id) {
+    public boolean remove(String id) {
         ArrayList<Package> packageList = this.filterPackage(id);
         int listSize = packageList.size();
 
@@ -40,7 +40,7 @@ public class PackageManager extends ArrayList<Package> {
         final Pattern descPattern = Pattern.compile(String.format("(.*%s.*)", id), Pattern.CASE_INSENSITIVE);
         final Pattern trackPattern = Pattern.compile(String.format("(^%s|%s$)", id, id), Pattern.CASE_INSENSITIVE);
 
-        for (Package pack: this) {
+        for (Package pack : this) {
             if (descPattern.matcher(pack.getDescription()).find()) {
                 matchingPacakges.add(pack);
                 continue;
