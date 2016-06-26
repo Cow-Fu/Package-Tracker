@@ -11,11 +11,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rocks.cow.Package.Package;
-import rocks.cow.Tracker.Tracker;
+import rocks.cow.Tracker.TrackerBase.Tracker;
+import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.Util.Tracking.TrackerUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public final class FedexTracker extends Tracker {
 
@@ -52,8 +50,7 @@ public final class FedexTracker extends Tracker {
     }
 
     @Override
-    public HashMap<String, ArrayList<? extends String>> track(Package p) {
-
+    public TrackingInfo track(Package p) {
         Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
 
         Elements elements = doc.body().select(".dp_travel_history_area").select(".content_area").first().select("tr");
@@ -67,25 +64,21 @@ public final class FedexTracker extends Tracker {
             }
             for (Element e : element.children()) {
                 if (e.hasClass("date_time")) {
-                    dateTime.add(e.text());
+                    trackingInfo.addTime(e.text());
                     continue;
                 }
                 if (e.hasClass("location")) {
-                    location.add(e.text());
+                    trackingInfo.addLocation(e.text());
                     continue;
                 }
                 if (e.hasClass("status")) {
-                    status.add(e.text());
+                    trackingInfo.addStatus(e.text());
                 }
             }
         }
 
-        HashMap<String, ArrayList<? extends String>> dataMap = new HashMap<>();
+        trackingInfo.setLocations(TrackerUtils.fillBlanks(trackingInfo.getLocations()));
 
-        dataMap.put("dateTime", dateTime);
-        dataMap.put("location", TrackerUtils.fillBlanks(location));
-        dataMap.put("status", status);
-
-        return dataMap;
+        return trackingInfo;
     }
 }

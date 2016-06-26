@@ -1,6 +1,6 @@
 package rocks.cow.Package.Carrier;
 
-import rocks.cow.Tracker.Track;
+import rocks.cow.Tracker.TrackerBase.Track;
 import rocks.cow.Tracker.Trackers.FedexTracker;
 import rocks.cow.Tracker.Trackers.UpsTracker;
 import rocks.cow.Tracker.Trackers.UspsTracker;

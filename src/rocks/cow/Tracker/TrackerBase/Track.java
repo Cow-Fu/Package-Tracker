@@ -1,11 +1,9 @@
 package rocks.cow.Tracker.TrackerBase;
 
 import rocks.cow.Package.Package;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
 
 
 public interface Track {
-    HashMap<String, ArrayList<? extends String>> track(Package p);
+    TrackingInfo track(Package p);
 }

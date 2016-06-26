@@ -2,14 +2,11 @@ package rocks.cow.Tracker.TrackerBase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
 
-import java.util.ArrayList;
 
 public abstract class Tracker implements Track{
-    protected ArrayList<String> dateTime = new ArrayList<>();
-    protected ArrayList<String> status = new ArrayList<>();
-    protected ArrayList<String> location = new ArrayList<>();
-
+    protected TrackingInfo trackingInfo = new TrackingInfo();
 
     protected String getPageSource(String url) {
         WebDriver webDriver = new HtmlUnitDriver();

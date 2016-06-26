@@ -2,9 +2,11 @@ package rocks.cow.Tracker.Trackers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import rocks.cow.Package.Package;
-import rocks.cow.Tracker.Tracker;
+import rocks.cow.Tracker.TrackerBase.Tracker;
+import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.Util.Tracking.TrackerUtils;
 
 import java.util.ArrayList;
@@ -12,22 +14,26 @@ import java.util.HashMap;
 
 public final class UspsTracker extends Tracker {
     @Override
-    public HashMap<String, ArrayList<? extends String>> track(Package p) {
+    public TrackingInfo track(Package p) {
 
         Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
 
-        Elements e = doc.body().select("tbody.details");
+        Elements element = doc.body().select("tbody.details");
 
-        e.select("td.date-time").forEach(date -> dateTime.add(date.text()));
-        e.select("td.status").forEach(stat -> status.add(stat.text()));
-        e.select("td.location").forEach(loc -> location.add(loc.text()));
+        for (Element e: element.select("td.date-time")) {
+            trackingInfo.addTime(e.text());
+        }
 
-        HashMap<String, ArrayList<? extends String>> dataMap = new HashMap<>();
+        for (Element e: element.select("td.status")) {
+            trackingInfo.addStatus(e.text());
+        }
 
-        dataMap.put("dateTime", dateTime);
-        dataMap.put("location", TrackerUtils.fillBlanks(location));
-        dataMap.put("status", status);
+        for (Element e: element.select("td.location")) {
+            trackingInfo.addLocation(e.text());
+        }
 
-        return dataMap;
+        trackingInfo.setLocations(TrackerUtils.fillBlanks(trackingInfo.getLocations()));
+
+        return trackingInfo;
     }
 }
