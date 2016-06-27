@@ -1,15 +1,15 @@
-package rocks.cow.Tracker;
+package rocks.cow.Tracker.TrackingManager;
 
 import rocks.cow.Package.Carrier.CarrierType;
 import rocks.cow.Package.Package;
+import rocks.cow.Tracker.TrackerBase.Track;
+import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Optional;
 
 public class TrackingManager {
 
-    public static HashMap<String, ArrayList<? extends String>> track(Package p) {
+    public static TrackingInfo track(Package p) {
         Optional<Track> tracker = Optional.empty();
 
         for (CarrierType type : CarrierType.values()) {

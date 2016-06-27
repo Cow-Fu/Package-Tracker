@@ -21,7 +21,7 @@ public class TrackerUtils {
 
     public static ArrayList<String> formatText(ArrayList<String> list) {
         ArrayList<String> newList = new ArrayList<>();
-        for (String text: list) {
+        for (String text : list) {
             text = text.trim();
 
             newList.add(text);
