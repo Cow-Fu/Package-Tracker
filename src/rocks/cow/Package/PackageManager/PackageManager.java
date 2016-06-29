@@ -1,13 +1,17 @@
 package rocks.cow.Package.PackageManager;
 
+import com.google.gson.*;
 import rocks.cow.Package.Carrier.CarrierType;
 import rocks.cow.Package.Package;
+import rocks.cow.Util.FileMethods;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
+    private static Gson gson = new Gson();
 
     public void addNew(String description, String trackingNum, CarrierType carrierType) {
         this.add(new Package(description, trackingNum, carrierType));
@@ -34,6 +38,63 @@ public class PackageManager extends ArrayList<Package> {
         return Optional.of(packageList);
     }
 
+    public void savePackages(String file) {
+        savePackages(new File(file));
+    }
+
+    public void savePackages(File file) {
+        new FileMethods(file).write(gson.toJson(this));
+    }
+
+    public void loadPackages(String file) {
+        loadPackages(new File(file));
+    }
+
+    public void loadPackages(File file) {
+        JsonElement json = new JsonParser().parse(new FileMethods(file).readFullFile());
+        if (json.isJsonNull()) {
+            throw new NullPointerException();
+        }
+        JsonObject jsonObj;
+        Optional<CarrierType> type;
+
+        if (json.isJsonArray()) {
+            for (JsonElement j: json.getAsJsonArray()) {
+                jsonObj = j.getAsJsonObject();
+                type = CarrierType.getType(jsonObj.get("carrier").getAsString());
+
+                if (!type.isPresent()) {
+                    throw new Error("Invalid Carrier Type");
+                }
+
+                this.addNew(
+                        jsonObj.get("description").getAsString(),
+                        jsonObj.get("trackingId").getAsString(),
+                        type.get()
+                );
+            }
+            return;
+        }
+
+        if (json.isJsonObject()) {
+            jsonObj = json.getAsJsonObject();
+            type = CarrierType.getType(jsonObj.get("carrier").getAsString());
+
+            if (!type.isPresent()) {
+                throw new Error("Invalid Carrier Type");
+            }
+
+            this.addNew(
+                    jsonObj.get("description").getAsString(),
+                    jsonObj.get("trackingID").getAsString(),
+                    type.get()
+            );
+            return;
+        }
+
+        throw new Error("No JsonObjects or JsonArray's were found in " + file.getPath());
+    }
+
     private ArrayList<Package> filterPackage(String id) {
         ArrayList<Package> matchingPacakges = new ArrayList<>();
         id = id.toLowerCase();
@@ -46,7 +107,7 @@ public class PackageManager extends ArrayList<Package> {
                 matchingPacakges.add(pack);
                 continue;
             }
-            if (trackPattern.matcher(pack.getTrackingNum()).find()) matchingPacakges.add(pack);
+            if (trackPattern.matcher(pack.getTrackingId()).find()) matchingPacakges.add(pack);
         }
         return matchingPacakges;
     }
