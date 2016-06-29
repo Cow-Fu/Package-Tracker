@@ -35,7 +35,7 @@ public final class UpsTracker extends Tracker {
 
     public TrackingInfo track(Package p) {
 
-        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
+        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingId()));
 
         Elements element = doc.body().select("table.dataTable").select("tbody").first().children();
         element.remove(0);

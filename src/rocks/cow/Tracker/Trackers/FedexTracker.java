@@ -51,7 +51,7 @@ public final class FedexTracker extends Tracker {
 
     @Override
     public TrackingInfo track(Package p) {
-        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
+        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingId()));
 
         Elements elements = doc.body().select(".dp_travel_history_area").select(".content_area").first().select("tr");
 

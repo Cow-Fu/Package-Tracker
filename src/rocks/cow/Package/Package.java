@@ -7,23 +7,23 @@ import java.util.Optional;
 
 public class Package {
     private String description;
-    private String trackingNum;
+    private String trackingId;
     private CarrierType carrier;
 
-    public Package(String description, String trackingNum, CarrierType carrier) {
+    public Package(String description, String trackingId, CarrierType carrier) {
         this.description = description;
-        this.trackingNum = trackingNum;
+        this.trackingId = trackingId;
         this.carrier = carrier;
     }
 
     // getters
 
-    public String getTrackingNum() {
-        return this.trackingNum;
+    public String getTrackingId() {
+        return this.trackingId;
     }
 
-    public Package setTrackingNum(String trackingNum) {
-        this.trackingNum = trackingNum;
+    public Package setTrackingId(String trackingId) {
+        this.trackingId = trackingId;
         return this;
     }
 
@@ -56,11 +56,11 @@ public class Package {
         return this.setCarrier(carrierType.get());
     }
 
-    public Package setAll(String id, String trackingNum, String carrier) {
-        return this.setDescription(id).setTrackingNum(trackingNum).setCarrier(carrier);
+    public Package setAll(String id, String trackingId, String carrier) {
+        return this.setDescription(id).setTrackingId(trackingId).setCarrier(carrier);
     }
 
-    public Package setAll(String id, String trackingNum, CarrierType carrier) {
-        return this.setDescription(id).setTrackingNum(trackingNum).setCarrier(carrier);
+    public Package setAll(String id, String trackingId, CarrierType carrier) {
+        return this.setDescription(id).setTrackingId(trackingId).setCarrier(carrier);
     }
 }

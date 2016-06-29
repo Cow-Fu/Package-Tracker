@@ -13,7 +13,7 @@ public final class UspsTracker extends Tracker {
     @Override
     public TrackingInfo track(Package p) {
 
-        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingNum()));
+        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingId()));
 
         Elements element = doc.body().select("tbody.details");
 
