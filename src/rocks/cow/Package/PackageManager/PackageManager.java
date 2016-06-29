@@ -1,6 +1,7 @@
-package rocks.cow.Package;
+package rocks.cow.Package.PackageManager;
 
 import rocks.cow.Package.Carrier.CarrierType;
+import rocks.cow.Package.Package;
 
 import java.util.ArrayList;
 import java.util.Optional;
