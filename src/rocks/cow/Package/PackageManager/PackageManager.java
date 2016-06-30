@@ -6,6 +6,7 @@ import rocks.cow.Package.Package;
 import rocks.cow.Util.FileMethods;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -38,19 +39,26 @@ public class PackageManager extends ArrayList<Package> {
         return Optional.of(packageList);
     }
 
-    public void savePackages(String file) {
+    public void savePackages(String file) throws FileNotFoundException {
         savePackages(new File(file));
     }
 
-    public void savePackages(File file) {
+    public void savePackages(File file) throws FileNotFoundException {
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        }
         new FileMethods(file).write(gson.toJson(this));
     }
 
-    public void loadPackages(String file) {
+    public void loadPackages(String file) throws FileNotFoundException {
         loadPackages(new File(file));
     }
 
-    public void loadPackages(File file) {
+    public void loadPackages(File file) throws FileNotFoundException {
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        }
+
         JsonElement json = new JsonParser().parse(new FileMethods(file).readFullFile());
         if (json.isJsonNull()) {
             throw new NullPointerException();
