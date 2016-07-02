@@ -1,13 +1,13 @@
-package rocks.cow.Tracker.Trackers;
+package rocks.cow.PackageTracker.Tracker.Trackers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import rocks.cow.Package.Package;
-import rocks.cow.Tracker.TrackerBase.Tracker;
-import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
-import rocks.cow.Util.Tracking.TrackerUtils;
+import rocks.cow.PackageTracker.Package.Package;
+import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
+import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
+import rocks.cow.PackageTracker.Util.Tracking.TrackerUtils;
 
 public final class UspsTracker extends Tracker {
     @Override

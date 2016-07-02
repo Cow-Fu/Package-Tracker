@@ -1,9 +1,9 @@
-package rocks.cow.Tracker.TrackingManager;
+package rocks.cow.PackageTracker.Tracker.TrackingManager;
 
-import rocks.cow.Package.Carrier.CarrierType;
-import rocks.cow.Package.Package;
-import rocks.cow.Tracker.TrackerBase.Track;
-import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierType;
+import rocks.cow.PackageTracker.Package.Package;
+import rocks.cow.PackageTracker.Tracker.TrackerBase.Track;
+import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 
 import java.util.Optional;
 

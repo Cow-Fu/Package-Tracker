@@ -1,10 +1,9 @@
-package rocks.cow;
+package rocks.cow.PackageTracker;
 
-import rocks.cow.Package.Carrier.CarrierType;
-import rocks.cow.Package.Package;
-import rocks.cow.Package.PackageManager;
-import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
-import rocks.cow.Tracker.TrackingManager.TrackingManager;
+import rocks.cow.PackageTracker.Package.Package;
+import rocks.cow.PackageTracker.Package.PackageManager.PackageManager;
+import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
+import rocks.cow.PackageTracker.Tracker.TrackingManager.TrackingManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,11 +17,14 @@ public class Main {
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
         PackageManager packages = new PackageManager();
+        packages.loadPackages("./test.json");
 
-        packages.addNew("Fluffy", "9611804140247301704689", CarrierType.FEDEX);
+        // packages.addNew("Fluffy", "9611804140247301704689", CarrierType.FEDEX);
+        // packages.addNew("luffy2", "9611804140247301704689", CarrierType.FEDEX);
+        //
+        // packages.savePackages("./test.json");
 
         Optional<ArrayList<Package>> optPackageList = packages.get("fluffy");
-
 
         if (optPackageList.isPresent()) {
             ArrayList<Package> packageList = optPackageList.get();

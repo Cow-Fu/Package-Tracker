@@ -1,4 +1,4 @@
-package rocks.cow.Tracker.Trackers;
+package rocks.cow.PackageTracker.Tracker.Trackers;
 
 
 import org.jsoup.Jsoup;
@@ -10,10 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import rocks.cow.Package.Package;
-import rocks.cow.Tracker.TrackerBase.Tracker;
-import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
-import rocks.cow.Util.Tracking.TrackerUtils;
+import rocks.cow.PackageTracker.Package.Package;
+import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
+import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
+import rocks.cow.PackageTracker.Util.Tracking.TrackerUtils;
 
 public final class UpsTracker extends Tracker {
 

@@ -5,12 +5,12 @@ sourceSets {
 }
 
 jar {
-    manifest.attributes "Main-Class": "rocks.cow.Main"
+    manifest.attributes "Main-Class": "rocks.cow.PackageTracker.Main"
 }
 
 
 task fatJar(type: Jar) {
-    manifest.attributes "Main-Class": "rocks.cow.Main"
+    manifest.attributes "Main-Class": "rocks.cow.PackageTracker.Main"
 
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }

@@ -1,8 +1,8 @@
-package rocks.cow.Tracker.TrackerBase;
+package rocks.cow.PackageTracker.Tracker.TrackerBase;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import rocks.cow.Tracker.TrackingInfo.TrackingInfo;
+import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 
 
 public abstract class Tracker implements Track {

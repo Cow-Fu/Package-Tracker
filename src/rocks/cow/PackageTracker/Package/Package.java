@@ -1,7 +1,7 @@
-package rocks.cow.Package;
+package rocks.cow.PackageTracker.Package;
 
 
-import rocks.cow.Package.Carrier.CarrierType;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierType;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package rocks.cow.Tracker.TrackingInfo;
+package rocks.cow.PackageTracker.Tracker.TrackingInfo;
 
 import java.util.ArrayList;
 

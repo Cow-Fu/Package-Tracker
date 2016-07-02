@@ -1,9 +1,9 @@
-package rocks.cow.Package.Carrier;
+package rocks.cow.PackageTracker.Package.Carrier;
 
-import rocks.cow.Tracker.TrackerBase.Track;
-import rocks.cow.Tracker.Trackers.FedexTracker;
-import rocks.cow.Tracker.Trackers.UpsTracker;
-import rocks.cow.Tracker.Trackers.UspsTracker;
+import rocks.cow.PackageTracker.Tracker.TrackerBase.Track;
+import rocks.cow.PackageTracker.Tracker.Trackers.FedexTracker;
+import rocks.cow.PackageTracker.Tracker.Trackers.UpsTracker;
+import rocks.cow.PackageTracker.Tracker.Trackers.UspsTracker;
 
 import java.util.Optional;
 
