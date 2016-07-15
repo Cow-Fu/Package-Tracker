@@ -1,33 +1,52 @@
 package rocks.cow.ArgumentParser.Argument;
 
-import rocks.cow.ArgumentParser.Argument.Property.Property;
-
 import java.util.ArrayList;
 
-public class Argument {
-    private final String name;
-    private final String helpMessage;
-    private final ArrayList<Property> properties;
+@SuppressWarnings("unchecked")
+public abstract class Argument<T> {
+    public static final int ONE_OR_MORE = -100;
+    public static final int ZERO_OR_MORE = -200;
 
-    public Argument(final String name, final String helpMessage, final ArrayList<Property> properties) {
-        this.name = name;
-        this.helpMessage = helpMessage;
-        this.properties = properties;
+    protected ArrayList<String> names;
+    protected String description;
+    protected int nargs = 1;
+
+    public ArrayList<String> getNames() {
+        return names;
     }
 
-    public String getName() {
-        return name;
+    public T addNames(String names) {
+        this.names.add(names);
+        return (T) this;
     }
 
-    public String getHelpMessage() {
-        return helpMessage;
+    public T addNames(ArrayList<String> names) {
+        this.names.addAll(names);
+        return (T) this;
     }
 
-    public ArrayList<Property> getProperties() {
-        return properties;
+    public String getDescription() {
+        return description;
     }
 
-    public boolean hasProperty(Property property) {
-        return this.properties.contains(property);
+
+    public T setDescription(String description) {
+        this.description = description;
+        return (T) this;
+    }
+
+    public int getNargs() {
+        return nargs;
+    }
+
+    public T setNargs(int nargs) {
+        if (nargs < 1 && nargs != Argument.ONE_OR_MORE && nargs != Argument.ZERO_OR_MORE) try {
+            throw new Exception("Value can't be lower than 1!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.nargs = nargs;
+        return (T) this;
     }
 }

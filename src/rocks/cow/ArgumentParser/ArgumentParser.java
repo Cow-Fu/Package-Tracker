@@ -1,17 +1,22 @@
 package rocks.cow.ArgumentParser;
 
-import rocks.cow.ArgumentParser.Argument.Argument;
+import rocks.cow.ArgumentParser.Argument.ArgumentArray.ArgumentArray;
+import rocks.cow.ArgumentParser.Argument.Errors.ArgumentNotFoundError;
+import rocks.cow.ArgumentParser.Argument.Flag.FlagArg;
+import rocks.cow.ArgumentParser.Argument.PositionalArg.PositionalArg;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ArgumentParser {
-    public ArrayList<Argument> argumentList;
+    private ArgumentArray argumentArray = new ArgumentArray();
+    private FlagArg tempFlag = new FlagArg();
+    private PositionalArg posArg = new PositionalArg();
 
-    public void addArgument(String name, boolean optional) {
-        argumentList.add(new Argument(name, optional));
+    public FlagArg addFlag() {
+        return
     }
-    public HashMap parseArgs(ArrayList list) {
-        return new HashMap();
+
+    public HashMap parseArgs(String[] args) throws ArgumentNotFoundError {
     }
+
 }
