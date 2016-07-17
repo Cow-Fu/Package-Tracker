@@ -1,8 +1,6 @@
-package rocks.cow.ArgumentParser.Argument.PositionalArg;
+package rocks.cow.ArgumentParser.internal.Argument.ArgumentTypes.PositionalArg;
 
-import rocks.cow.ArgumentParser.Argument.Argument;
-
-import java.util.ArrayList;
+import rocks.cow.ArgumentParser.internal.Argument.Argument;
 
 public class PositionalArg extends Argument<PositionalArg> {
     @Override

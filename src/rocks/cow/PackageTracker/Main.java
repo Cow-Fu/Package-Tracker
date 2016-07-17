@@ -1,6 +1,5 @@
 package rocks.cow.PackageTracker;
 
-import rocks.cow.ArgumentParser.ArgumentParser;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Package.PackageManager.PackageManager;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
@@ -8,7 +7,6 @@ import rocks.cow.PackageTracker.Tracker.TrackingManager.TrackingManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.logging.Level;
 
@@ -17,15 +15,13 @@ public class Main {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
-        ArgumentParser parser = new ArgumentParser();
-
-        parser.addArgument("carrier");
-        parser.addArgument("trackingID");
-        parser.addArgument("desc");
-
-        HashMap map = parser.parseArgs(args);
-
-
+        // ArgumentParser parser = new ArgumentParser();
+        //
+        // parser.addArgument("carrier");
+        // parser.addArgument("trackingID");
+        // parser.addArgument("desc");
+        //
+        // HashMap map = parser.parseArgs(args);
 
         PackageManager packages = new PackageManager();
         packages.loadPackages("./test.json");

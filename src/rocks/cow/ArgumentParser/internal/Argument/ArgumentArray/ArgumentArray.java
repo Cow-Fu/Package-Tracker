@@ -1,7 +1,7 @@
-package rocks.cow.ArgumentParser.Argument.ArgumentArray;
+package rocks.cow.ArgumentParser.internal.Argument.ArgumentArray;
 
-import rocks.cow.ArgumentParser.Argument.Flag.FlagArg;
-import rocks.cow.ArgumentParser.Argument.PositionalArg.PositionalArg;
+import rocks.cow.ArgumentParser.internal.Argument.ArgumentTypes.Flag.FlagArg;
+import rocks.cow.ArgumentParser.internal.Argument.ArgumentTypes.PositionalArg.PositionalArg;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,7 +44,10 @@ public class ArgumentArray {
 
     public Optional<FlagArg> getFlag(String id) {
         for (FlagArg flag : flags) {
-            if (flag.getNames().contains(id)) {
+            if (flag.getShortName().equals(id)) {
+                return Optional.of(flag);
+            }
+            if (flag.getLongName().equals(id)) {
                 return Optional.of(flag);
             }
         }
@@ -53,7 +56,10 @@ public class ArgumentArray {
 
     public Optional<PositionalArg> getPositional(String id) {
         for (PositionalArg pos : positionals) {
-            if (pos.getNames().contains(id)) {
+            if (pos.getShortName().equals(id)) {
+                return Optional.of(pos);
+            }
+            if (pos.getLongName().equals(id)) {
                 return Optional.of(pos);
             }
         }
