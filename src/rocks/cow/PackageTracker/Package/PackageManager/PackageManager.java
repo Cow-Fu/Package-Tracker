@@ -1,18 +1,13 @@
 package rocks.cow.PackageTracker.Package.PackageManager;
 
-import com.google.gson.*;
 import rocks.cow.PackageTracker.Package.Carrier.CarrierType;
 import rocks.cow.PackageTracker.Package.Package;
-import rocks.cow.PackageTracker.Util.FileMethods;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
-
 
     public void addNew(String description, String trackingNum, CarrierType carrierType) {
         this.add(new Package(description, trackingNum, carrierType));

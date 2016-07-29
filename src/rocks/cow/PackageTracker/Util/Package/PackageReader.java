@@ -1,7 +1,6 @@
 package rocks.cow.PackageTracker.Util.Package;
 
 import com.google.gson.*;
-import rocks.cow.PackageTracker.Package.Carrier.CarrierType;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Util.FileMethods;
 
@@ -33,35 +32,35 @@ public class PackageReader {
         }
 
         JsonObject jsonObj;
-        Optional<CarrierType> type;
+        Optional<String> carrierType;
 
         if (json.isJsonArray()) {
             for (JsonElement j: json.getAsJsonArray()) {
                 jsonObj = j.getAsJsonObject();
-                type = CarrierType.getType(jsonObj.get("carrier").getAsString());
+                carrierType = Optional.of(jsonObj.get("carrier").getAsString());
 
-                if (!type.isPresent()) {
+                if (!carrierType.isPresent()) {
                     throw new Error("Invalid Carrier Type");
                 }
 
                 packages.add(new Package(
                         jsonObj.get("description").getAsString(),
                         jsonObj.get("trackingId").getAsString(),
-                        type.get()
+                        carrierType.get()
                 ));
             }
         } else if (json.isJsonObject()) {
             jsonObj = json.getAsJsonObject();
-            type = CarrierType.getType(jsonObj.get("carrier").getAsString());
+            carrierType = Optional.of(jsonObj.get("carrier").getAsString());
 
-            if (!type.isPresent()) {
+            if (!carrierType.isPresent()) {
                 throw new Error("Invalid Carrier Type");
             }
 
             packages.add(new Package(
                     jsonObj.get("description").getAsString(),
                     jsonObj.get("trackingId").getAsString(),
-                    type.get()
+                    carrierType.get()
             ));
         }
         return packages;

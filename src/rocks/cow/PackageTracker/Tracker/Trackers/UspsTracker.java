@@ -4,14 +4,34 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.PackageTracker.Util.Tracking.TrackerUtils;
 
-public final class UspsTracker extends Tracker {
-    @Override
+public final class UspsTracker implements Tracker {
+    private String getPageSource (String url) {
+        WebDriver webDriver = new HtmlUnitDriver();
+        webDriver.get(url);
+
+        String src = webDriver.getPageSource();
+        webDriver.quit();
+
+        return src;
+    }
+
+    public Carrier getCarrierInfo() {
+        return new Carrier()
+                .setId("USPS")
+                .setUrl("URL")
+                .setTracker(this.getClass());
+    }
+
     public TrackingInfo track(Package p) {
+        TrackingInfo trackingInfo = new TrackingInfo();
 
         Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingId()));
 

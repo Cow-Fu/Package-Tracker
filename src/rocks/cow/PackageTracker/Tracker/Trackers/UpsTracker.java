@@ -10,14 +10,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.PackageTracker.Util.Tracking.TrackerUtils;
 
-public final class UpsTracker extends Tracker {
 
-    @Override
+public final class UpsTracker implements Tracker {
+
     public String getPageSource(String url) {
         HtmlUnitDriver webDriver = new HtmlUnitDriver();
         webDriver.setJavascriptEnabled(true);
@@ -33,9 +34,17 @@ public final class UpsTracker extends Tracker {
         return src;
     }
 
-    public TrackingInfo track(Package p) {
+    public Carrier getCarrierInfo() {
+        return new Carrier()
+                .setId("UPS")
+                .setUrl("URL")
+                .setTracker(this.getClass());
+    }
 
-        Document doc = Jsoup.parse(getPageSource(p.getCarrier().getUrl() + p.getTrackingId()));
+    public TrackingInfo track(Package p) {
+        TrackingInfo trackingInfo = new TrackingInfo();
+
+        Document doc = Jsoup.parse(getPageSource(p.getCarrier() + p.getTrackingId()));
 
         Elements element = doc.body().select("table.dataTable").select("tbody").first().children();
         element.remove(0);

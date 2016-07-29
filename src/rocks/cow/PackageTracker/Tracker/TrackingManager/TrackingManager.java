@@ -1,33 +1,59 @@
 package rocks.cow.PackageTracker.Tracker.TrackingManager;
 
-import rocks.cow.PackageTracker.Package.Carrier.CarrierType;
 import rocks.cow.PackageTracker.Package.Package;
-import rocks.cow.PackageTracker.Tracker.TrackerBase.Track;
+import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 
+import java.util.HashMap;
 import java.util.Optional;
+import java.util.Set;
 
 public class TrackingManager {
+    private HashMap<String, Class<? extends Tracker>> indexedTrackers = new HashMap<>();
 
-    public static TrackingInfo track(Package p) {
-        Optional<Track> tracker = Optional.empty();
+    public TrackingManager () {}
 
-        for (CarrierType type : CarrierType.values()) {
-            if (p.getCarrier().equals(type)) {
-                try {
-                    tracker = Optional.of(type.getTrackingClass().newInstance());
-                } catch (InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-        }
-
-        if (!tracker.isPresent()) {
-            throw new NullPointerException("Unable to find tracking class");
-        }
-
-        return tracker.get().track(p);
+    public TrackingManager (Set<Class<? extends Tracker>> trackers) {
+        setTrackers(trackers);
     }
 
+    public HashMap<String, Class<? extends Tracker>> getTrackers() {
+        return indexedTrackers;
+    }
+
+    public void setTrackers(Set<Class<? extends Tracker>> trackers) {
+        indexTrackers(trackers);
+    }
+
+    private void indexTrackers(Set<Class<? extends Tracker>> trackers) {
+        for (Class<? extends Tracker> tracker : trackers) {
+            Tracker trackerInst = null;
+            try {
+                trackerInst = tracker.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+                continue;
+            }
+
+            if (!indexedTrackers.containsKey(trackerInst.getId())) {
+                indexedTrackers.put(trackerInst.getId(), trackerInst.getClass());
+            }
+        }
+    }
+
+    public Optional<TrackingInfo> track(Package p) {
+        Optional<TrackingInfo> info = Optional.empty();
+        Optional<Tracker> tracker = Optional.empty();
+
+        try {
+            tracker = Optional.of(indexedTrackers.get(p.getCarrier()).newInstance());
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        if (tracker.isPresent()) {
+            info = Optional.of(tracker.get().track(p));
+        }
+        return info;
+    }
 }
