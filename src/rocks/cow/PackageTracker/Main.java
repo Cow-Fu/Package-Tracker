@@ -1,5 +1,6 @@
 package rocks.cow.PackageTracker;
 
+import com.google.common.reflect.Reflection;
 import org.reflections.Reflections;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Package.PackageManager.PackageManager;
@@ -18,12 +19,12 @@ public class Main {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
-        Reflections reflections = new Reflections("rocks.cow.PackageTracker");
-
         PackageManager packages = new PackageManager();
         packages.addAll(new PackageReader().loadPackages("./test.json"));
 
-        TrackingManager tracker = new TrackingManager(reflections.getSubTypesOf(Tracker.class));
+        TrackingManager tracker = new TrackingManager(
+                new Reflections().getSubTypesOf(Tracker.class)
+        );
 
         // packages.addNew("Fluffy", "9611804140247301704689", CarrierType.FEDEX);
         // packages.addNew("luffy2", "9611804140247301704689", CarrierType.FEDEX);
@@ -36,11 +37,13 @@ public class Main {
             ArrayList<Package> packageList = optPackageList.get();
 
             for (Package pack : packageList) {
-                System.out.println(pack.getDescription() + ":");
+                System.out.println(String.format("Fetching latest information for package \"%s\":",
+                        pack.getDescription()));
 
                 Optional<TrackingInfo> packageInfo = tracker.track(pack);
 
                 if (!packageInfo.isPresent()) {
+                    System.out.println("Unable to track package!");
                     continue;
                 }
 

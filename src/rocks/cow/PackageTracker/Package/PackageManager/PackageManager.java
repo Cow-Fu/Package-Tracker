@@ -1,6 +1,6 @@
 package rocks.cow.PackageTracker.Package.PackageManager;
 
-import rocks.cow.PackageTracker.Package.Carrier.CarrierType;
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
 import rocks.cow.PackageTracker.Package.Package;
 
 import java.util.ArrayList;
@@ -8,8 +8,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
-
-    public void addNew(String description, String trackingNum, CarrierType carrierType) {
+    public void addNew(String description, String trackingNum, Carrier carrierType) {
         this.add(new Package(description, trackingNum, carrierType));
     }
 

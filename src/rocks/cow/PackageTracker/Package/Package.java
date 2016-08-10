@@ -1,11 +1,13 @@
 package rocks.cow.PackageTracker.Package;
 
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
+
 public class Package {
     private String description;
     private String trackingId;
-    private String carrier;
+    private Carrier carrier;
 
-    public Package(String description, String trackingId, String carrier) {
+    public Package(String description, String trackingId, Carrier carrier) {
         this.description = description;
         this.trackingId = trackingId;
         this.carrier = carrier;
@@ -33,16 +35,16 @@ public class Package {
         return this;
     }
 
-    public String getCarrier() {
+    public Carrier getCarrier() {
         return carrier;
     }
 
-    public Package setCarrier(String carrier) {
+    public Package setCarrier(Carrier carrier) {
         this.carrier = carrier;
         return this;
     }
 
-    public Package setAll(String id, String trackingId, String carrier) {
+    public Package setAll(String id, String trackingId, Carrier carrier) {
         return this.setDescription(id).setTrackingId(trackingId).setCarrier(carrier);
     }
 

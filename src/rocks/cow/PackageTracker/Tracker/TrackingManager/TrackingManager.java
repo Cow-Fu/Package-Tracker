@@ -1,5 +1,6 @@
 package rocks.cow.PackageTracker.Tracker.TrackingManager;
 
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
@@ -9,7 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class TrackingManager {
-    private HashMap<String, Class<? extends Tracker>> indexedTrackers = new HashMap<>();
+    private HashMap<String, Class<Carrier>> indexedTrackers = new HashMap<>();
 
     public TrackingManager () {}
 
@@ -17,7 +18,7 @@ public class TrackingManager {
         setTrackers(trackers);
     }
 
-    public HashMap<String, Class<? extends Tracker>> getTrackers() {
+    public HashMap<String, Class<Carrier>> getCarriers() {
         return indexedTrackers;
     }
 
