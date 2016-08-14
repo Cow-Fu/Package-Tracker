@@ -53,7 +53,7 @@ public final class FedexTracker implements Tracker {
     public Carrier getCarrierInfo() {
         return new Carrier()
                 .setId("FEDEX")
-                .setUrl("URL")
+                .setUrl("https://www.fedex.com/apps/fedextrack/?action=track&action=track&tracknumber_list=")
                 .setTracker(this.getClass());
     }
 

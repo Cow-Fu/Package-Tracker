@@ -37,7 +37,7 @@ public final class UpsTracker implements Tracker {
     public Carrier getCarrierInfo() {
         return new Carrier()
                 .setId("UPS")
-                .setUrl("URL")
+                .setUrl("https://wwwapps.ups.com/WebTracking/track?loc=en_US&track.x=Track&trackNums=")
                 .setTracker(this.getClass());
     }
 

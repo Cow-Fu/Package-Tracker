@@ -26,7 +26,7 @@ public final class UspsTracker implements Tracker {
     public Carrier getCarrierInfo() {
         return new Carrier()
                 .setId("USPS")
-                .setUrl("URL")
+                .setUrl("https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=")
                 .setTracker(this.getClass());
     }
 
