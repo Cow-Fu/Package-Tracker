@@ -25,8 +25,14 @@ public class Carrier {
         return this;
     }
 
-    public Class<? extends Tracker> getTracker() {
-        return tracker;
+    public Tracker getTracker() {
+        Tracker trackerInst = null;
+        try {
+            trackerInst = tracker.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return trackerInst;
     }
 
     public Carrier setTracker(Class<? extends Tracker> tracker) {

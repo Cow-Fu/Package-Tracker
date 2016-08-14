@@ -2,7 +2,10 @@ package rocks.cow.PackageTracker.Package.PackageManager;
 
 import rocks.cow.PackageTracker.Package.Carrier.Carrier;
 import rocks.cow.PackageTracker.Package.Package;
+import rocks.cow.PackageTracker.Util.Package.PackageWriter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -52,5 +55,14 @@ public class PackageManager extends ArrayList<Package> {
             if (trackPattern.matcher(pack.getTrackingId()).find()) matchingPacakges.add(pack);
         }
         return matchingPacakges;
+    }
+
+    public boolean savePackages (String file) {
+        try {
+            PackageWriter.savePackages(new File(file), this);
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 }

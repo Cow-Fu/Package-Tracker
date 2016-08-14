@@ -1,6 +1,7 @@
 package rocks.cow.PackageTracker.Util.Package;
 
 import com.google.gson.*;
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Util.FileMethods;
 
@@ -32,12 +33,12 @@ public class PackageReader {
         }
 
         JsonObject jsonObj;
-        Optional<String> carrierType;
+        Optional<Carrier> carrierType;
 
         if (json.isJsonArray()) {
             for (JsonElement j: json.getAsJsonArray()) {
                 jsonObj = j.getAsJsonObject();
-                carrierType = Optional.of(jsonObj.get("carrier").getAsString());
+                carrierType = Optional.of(new Gson().fromJson(jsonObj.get("carrier"), Carrier.class));
 
                 if (!carrierType.isPresent()) {
                     throw new Error("Invalid Carrier Type");
@@ -51,7 +52,7 @@ public class PackageReader {
             }
         } else if (json.isJsonObject()) {
             jsonObj = json.getAsJsonObject();
-            carrierType = Optional.of(jsonObj.get("carrier").getAsString());
+            carrierType = Optional.of(new Gson().fromJson(jsonObj.get("carrier"), Carrier.class));
 
             if (!carrierType.isPresent()) {
                 throw new Error("Invalid Carrier Type");

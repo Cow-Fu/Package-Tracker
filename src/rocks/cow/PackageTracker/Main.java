@@ -1,10 +1,10 @@
 package rocks.cow.PackageTracker;
 
-import com.google.common.reflect.Reflection;
-import org.reflections.Reflections;
+import rocks.cow.PackageTracker.Package.Carrier.Carrier;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierTypes;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierTypesBuilder;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Package.PackageManager.PackageManager;
-import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.PackageTracker.Tracker.TrackingManager.TrackingManager;
 import rocks.cow.PackageTracker.Util.Package.PackageReader;
@@ -20,16 +20,18 @@ public class Main {
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
         PackageManager packages = new PackageManager();
-        packages.addAll(new PackageReader().loadPackages("./test.json"));
+        CarrierTypes carriers = new CarrierTypesBuilder().getCarriers();
+        // packages.addAll(new PackageReader().loadPackages("./test.json"));
 
-        TrackingManager tracker = new TrackingManager(
-                new Reflections().getSubTypesOf(Tracker.class)
-        );
+        TrackingManager tracker = new TrackingManager();
+        Optional<Carrier> fedex = carriers.getById("fedex");
+        if (fedex.isPresent()) {
+            packages.addNew("Fluffy", "9611804140247301704689", fedex.get());
+            packages.addNew("luffy2", "9611804140247301704689", fedex.get());
+            packages.savePackages("./test.json");
 
-        // packages.addNew("Fluffy", "9611804140247301704689", CarrierType.FEDEX);
-        // packages.addNew("luffy2", "9611804140247301704689", CarrierType.FEDEX);
-        //
-        // packages.savePackages("./test.json");
+        }
+
 
         Optional<ArrayList<Package>> optPackageList = packages.get("fluffy");
 
