@@ -6,6 +6,7 @@ import rocks.cow.PackageTracker.Util.FileMethods;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PackageWriter {
@@ -17,7 +18,11 @@ public class PackageWriter {
 
     public static void savePackages(File file, ArrayList<Package> packages) throws FileNotFoundException {
         if (!file.exists()) {
-            throw new FileNotFoundException();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         new FileMethods(file).write(gson.toJson(packages));
     }
