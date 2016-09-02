@@ -19,8 +19,9 @@ public class Main {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
-        PackageManager packages = new PackageManager();
         CarrierTypes carriers = new CarrierTypesBuilder().getCarriers();
+        PackageManager packages = new PackageManager();
+
         // packages.addAll(new PackageReader().loadPackages("./test.json"));
 
         TrackingManager tracker = new TrackingManager();
