@@ -1,19 +1,17 @@
 package rocks.cow.PackageTracker.Package;
 
-import rocks.cow.PackageTracker.Package.Carrier.Carrier;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierType;
 
 public class Package {
     private String description;
     private String trackingId;
-    private Carrier carrier;
+    private CarrierType carrier;
 
-    public Package(String description, String trackingId, Carrier carrier) {
+    public Package(String description, String trackingId, CarrierType carrier) {
         this.description = description;
         this.trackingId = trackingId;
         this.carrier = carrier;
     }
-
-    // getters
 
     public String getTrackingId() {
         return this.trackingId;
@@ -28,23 +26,21 @@ public class Package {
         return this.description;
     }
 
-    //setters
-
     public Package setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public Carrier getCarrier() {
+    public CarrierType getCarrier() {
         return carrier;
     }
 
-    public Package setCarrier(Carrier carrier) {
+    public Package setCarrier(CarrierType carrier) {
         this.carrier = carrier;
         return this;
     }
 
-    public Package setAll(String id, String trackingId, Carrier carrier) {
+    public Package setAll(String id, String trackingId, CarrierType carrier) {
         return this.setDescription(id).setTrackingId(trackingId).setCarrier(carrier);
     }
 

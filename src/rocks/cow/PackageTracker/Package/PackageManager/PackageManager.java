@@ -1,7 +1,8 @@
 package rocks.cow.PackageTracker.Package.PackageManager;
 
 import rocks.cow.PackageTracker.Package.Carrier.Carrier;
-import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierTypes;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierType;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.Carriers;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Util.Package.PackageWriter;
 
@@ -12,13 +13,13 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class PackageManager extends ArrayList<Package> {
-    private CarrierTypes carrierTypes;
+    private Carriers carrierTypes;
 
-    public PackageManager (CarrierTypes carrierTypes) {
+    public PackageManager (Carriers carrierTypes) {
         this.carrierTypes = carrierTypes;
     }
 
-    public void addNew(String description, String trackingNum, Carrier carrierType) {
+    public void addNew(String description, String trackingNum, CarrierType carrierType) {
         this.add(new Package(description, trackingNum, carrierType));
     }
 

@@ -5,19 +5,19 @@ import rocks.cow.PackageTracker.Tracker.TrackerBase.Tracker;
 
 import java.util.Set;
 
-public class CarrierTypesBuilder {
-    private CarrierTypes carriers = new CarrierTypes();
+public class CarriersBuilder {
+    private Carriers carriers = new Carriers();
     private static final String defaultTrackerDir = "rocks.cow.PackageTracker.Tracker.Trackers";
 
-    public CarrierTypesBuilder () {
+    public CarriersBuilder() {
         this(defaultTrackerDir);
     }
 
-    public CarrierTypesBuilder (String trackerDir) {
+    public CarriersBuilder(String trackerDir) {
         update(trackerDir);
     }
 
-    public CarrierTypes getCarriers() {
+    public Carriers getCarriers() {
         return carriers;
     }
 

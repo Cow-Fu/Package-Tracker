@@ -1,13 +1,12 @@
 package rocks.cow.PackageTracker;
 
 import rocks.cow.PackageTracker.Package.Carrier.Carrier;
-import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierTypes;
-import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarrierTypesBuilder;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.Carriers;
+import rocks.cow.PackageTracker.Package.Carrier.CarrierTypes.CarriersBuilder;
 import rocks.cow.PackageTracker.Package.Package;
 import rocks.cow.PackageTracker.Package.PackageManager.PackageManager;
 import rocks.cow.PackageTracker.Tracker.TrackingInfo.TrackingInfo;
 import rocks.cow.PackageTracker.Tracker.TrackingManager.TrackingManager;
-import rocks.cow.PackageTracker.Util.Package.PackageReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +18,8 @@ public class Main {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
-        CarrierTypes carriers = new CarrierTypesBuilder().getCarriers();
-        PackageManager packages = new PackageManager();
+        Carriers carriers = new CarriersBuilder().getCarriers();
+        PackageManager packages = new PackageManager(carriers);
 
         // packages.addAll(new PackageReader().loadPackages("./test.json"));
 
@@ -32,7 +31,6 @@ public class Main {
             packages.savePackages("./test.json");
 
         }
-
 
         Optional<ArrayList<Package>> optPackageList = packages.get("fluffy");
 
